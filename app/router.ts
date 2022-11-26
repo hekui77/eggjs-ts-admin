@@ -5,4 +5,5 @@ export default (app: Application) => {
 
   router.get('/api/test', controller.test.index);
   router.post('/api/test', controller.test.testPost);
+  router.post('/api/test/updata', controller.test.updata);
 };
