@@ -15,6 +15,21 @@ export default (appInfo: EggAppInfo) => {
     sourceUrl: `https://github.com/eggjs/examples/tree/master/${appInfo.name}`,
   };
 
+  config.swaggerdoc = {
+    dirScanner: './app/controller',
+    apiInfo: {
+      title: 'egg-swagger',
+      description: 'swagger-ui for egg',
+      version: '1.0.0',
+    },
+    schemes: [ 'http', 'https' ],
+    consumes: [ 'application/json' ],
+    produces: [ 'application/json' ],
+    securityDefinitions: {},
+  };
+
+  config.validate = {};
+
   // the return config will combines to EggAppConfig
   return {
     ...config,
