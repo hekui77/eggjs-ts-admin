@@ -1,9 +1,7 @@
 
 const Controller = require('../core/base_controller');
 
-/**
-  *@Controller
-  */
+
 export default class TestController extends Controller {
   /**
    * @Router get /api/test

@@ -21,7 +21,13 @@ export default class UserController extends Controller {
    */
   async register() {
     const { ctx } = this;
-    ctx.validate(ctx.rule.userRegister, ctx.request.body);
+    // 重新定义需要校验格式的字段
+    const rule = Object.assign(ctx.rule.userRegister, {
+      phone: 'phone',
+      password: 'password',
+      email: 'email?',
+    });
+    ctx.validate(rule, ctx.request.body);
     const body = JSON.parse(JSON.stringify(ctx.request.body, Object.keys(ctx.rule.userRegister)));
     const data = await ctx.service.user.register(body);
     this.success(data);

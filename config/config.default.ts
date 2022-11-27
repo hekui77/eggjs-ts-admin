@@ -28,7 +28,10 @@ export default (appInfo: EggAppInfo) => {
     securityDefinitions: {},
   };
 
-  config.validate = {};
+  config.validate = {
+    convert: true,
+    widelyUndefined: true,
+  };
 
   config.mysql = {
     // 单数据库信息配置

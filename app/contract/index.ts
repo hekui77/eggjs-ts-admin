@@ -16,3 +16,22 @@ module.exports = {
     img: { type: 'string', required: false, describe: '头像地址' },
   },
 };
+
+
+// 'int' => {type: 'int', required: true}
+// 'int?' => {type: 'int', required: false }
+// 'integer' => {type: 'integer', required: true}
+// 'number' => {type: 'number', required: true}
+// 'date' => {type: 'date', required: true}
+// 'dateTime' => {type: 'dateTime', required: true}
+// 'id' => {type: 'id', required: true}
+// 'boolean' => {type: 'boolean', required: true}
+// 'bool' => {type: 'bool', required: true}
+// 'string' => {type: 'string', required: true, allowEmpty: false}
+// 'string?' => {type: 'string', required: false, allowEmpty: true}
+// 'email' => {type: 'email', required: true, allowEmpty: false, format: EMAIL_RE}
+// 'password' => {type: 'password', required: true, allowEmpty: false, format: PASSWORD_RE, min: 6}
+// 'object' => {type: 'object', required: true}
+// 'array' => {type: 'array', required: true}
+// [1, 2] => {type: 'enum', values: [1, 2]}
+// /\d+/ => {type: 'string', required: true, allowEmpty: false, format: /\d+/}
