@@ -19,18 +19,13 @@ export default class Test extends Service {
 
   async testPost(data) {
     const { app } = this;
-    const result: any = await app.mysql.insert('test', { ...data });
+    const result = await app.mysql.insert('test', { ...data });
     return result;
   }
 
-  async updata() {
+  async updata(data) {
     const { app } = this;
-    const row = {
-      id: 4,
-      userName: '修改1',
-      age: 56,
-    };
-    const result: any = await app.mysql.update('test', row);
+    const result = await app.mysql.update('test', { ...data });
     return result;
   }
 }

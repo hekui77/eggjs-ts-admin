@@ -24,7 +24,11 @@ export default class TestController extends Controller {
   async testPost() {
     const { ctx } = this;
     ctx.validate(ctx.rule.test, ctx.request.body);
-    const data = await ctx.service.test.testPost(ctx.request.body);
+    const body = {
+      userName: ctx.request.body.userName,
+      age: ctx.request.body.age,
+    };
+    const data = await ctx.service.test.testPost(body);
     this.success(data);
   }
 
@@ -36,7 +40,13 @@ export default class TestController extends Controller {
   async updata() {
     const { ctx } = this;
     ctx.validate(ctx.rule.test, ctx.request.body);
-    const data = await ctx.service.test.updata(ctx.request.body);
+    if (!ctx.request.body.id) ctx.throw(201, 'id不能为空');
+    const body = {
+      id: ctx.request.body.id,
+      userName: ctx.request.body.userName,
+      age: ctx.request.body.age,
+    };
+    const data = await ctx.service.test.updata(body);
     this.success(data);
   }
 }
