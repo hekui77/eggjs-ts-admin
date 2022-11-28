@@ -6,6 +6,7 @@ export default class user extends Service {
     const { app, ctx } = this;
     const result = await app.mysql.select('user', {
       where: { ...data },
+      columns: [ 'id', 'phone', 'email', 'nickname', 'img' ],
     });
     if (!result.length) ctx.throw(201, '手机号码或密码错误');
     const userInfo = { ...result[0] };
@@ -25,7 +26,9 @@ export default class user extends Service {
 
   async find() {
     const { app } = this;
-    const result = await app.mysql.select('user');
+    const result = await app.mysql.select('user', {
+      columns: [ 'id', 'phone', 'email', 'nickname', 'img', 'createTime', 'updataTime' ],
+    });
     return result;
   }
 }
