@@ -1,7 +1,7 @@
 import { Application } from 'egg';
 
 export default (app: Application) => {
-  const { controller, router } = app;
+  const { controller, router, jwt } = app;
 
   router.get('/api/test', controller.test.index);
   router.post('/api/test', controller.test.testPost);
@@ -9,4 +9,5 @@ export default (app: Application) => {
 
   router.post('/api/user/login', controller.user.login);
   router.post('/api/user/register', controller.user.register);
+  router.get('/api/user', jwt, controller.user.find);
 };

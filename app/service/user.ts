@@ -8,7 +8,9 @@ export default class user extends Service {
       where: { ...data },
     });
     if (!result.length) ctx.throw(201, '手机号码或密码错误');
-    return result[0];
+    const userInfo = { ...result[0] };
+    const token = app.jwt.sign(userInfo, '123456', { expiresIn: '24h' });
+    return Object.assign(userInfo, { token });
   }
 
   async register(data) {
@@ -19,5 +21,11 @@ export default class user extends Service {
     if (findUser.length) ctx.throw(201, '已存在当前手机号码');
     const result: any = await app.mysql.insert('user', { ...data });
     if (result.affectedRows === 1) return '注册成功';
+  }
+
+  async find() {
+    const { app } = this;
+    const result = await app.mysql.select('user');
+    return result;
   }
 }

@@ -5,8 +5,8 @@ module.exports = {
     age: { type: 'number', required: true, describe: '年龄', example: 22 },
   },
   userLogin: {
-    phone: { type: 'string', required: true, describe: '手机号码', example: 'admin' },
-    password: { type: 'string', required: true, describe: '密码', example: 'admin' },
+    phone: { type: 'string', required: true, describe: '手机号码', example: '18284053714' },
+    password: { type: 'string', required: true, describe: '密码', example: 'adminadmin' },
   },
   userRegister: {
     phone: { type: 'string', required: true, describe: '手机号码' },

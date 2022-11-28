@@ -18,6 +18,10 @@ const plugin: EggPlugin = {
     enable: true,
     package: 'egg-mysql',
   },
+  jwt: {
+    enable: true,
+    package: 'egg-jwt',
+  },
 };
 
 export default plugin;

@@ -25,7 +25,14 @@ export default (appInfo: EggAppInfo) => {
     schemes: [ 'http', 'https' ],
     consumes: [ 'application/json' ],
     produces: [ 'application/json' ],
-    securityDefinitions: {},
+    securityDefinitions: {
+      Bearer: {
+        type: 'apiKey',
+        name: 'authorization',
+        in: 'header',
+      },
+    },
+    enableSecurity: true,
   };
 
   config.validate = {

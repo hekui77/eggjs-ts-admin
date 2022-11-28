@@ -32,4 +32,13 @@ export default class UserController extends Controller {
     const data = await ctx.service.user.register(body);
     this.success(data);
   }
+  /**
+   * @Router get /api/user
+   * @Bearer
+   */
+  async find() {
+    const { ctx } = this;
+    const data = await ctx.service.user.find();
+    this.success(data);
+  }
 }
