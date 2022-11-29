@@ -3,6 +3,8 @@ import { Application } from 'egg';
 export default (app: Application) => {
   const { controller, router, jwt } = app;
 
+  router.get('/', controller.home.index);
+
   router.get('/api/test', controller.test.index);
   router.post('/api/test', controller.test.testPost);
   router.post('/api/test/updata', controller.test.updata);
