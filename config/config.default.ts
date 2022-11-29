@@ -43,10 +43,10 @@ export default (appInfo: EggAppInfo) => {
   config.mysql = {
     // 单数据库信息配置
     client: {
-      host: 'localhost',
+      host: '116.62.64.16',
       port: '3306',
-      user: 'root',
-      password: '123456',
+      user: 'admin_project',
+      password: 'CAspd2BwxwnKPNAW',
       database: 'admin_project',
     },
     // 是否加载到 app 上，默认开启
