@@ -10,7 +10,7 @@ export default class TestController extends Controller {
    */
   public async index() {
     const { ctx } = this;
-    const data = await ctx.service.test.sayHi(ctx.query.userName);
+    const data = await ctx.service.test.sayHi('egg');
     this.success(data);
   }
 

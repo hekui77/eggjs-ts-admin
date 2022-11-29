@@ -10,11 +10,13 @@ export default class Test extends Service {
    * @param name - your name
    */
   public async sayHi(name: string) {
-    const { app } = this;
-    if (!name) return await app.mysql.select('test');
-    return await app.mysql.select('test', {
-      where: { userName: name },
-    });
+    // const { app } = this;
+    // if (!name) return await app.mysql.select('test');
+    // return await app.mysql.select('test', {
+    //   where: { userName: name },
+    // });
+
+    return 'hi, ' + name;
   }
 
   async testPost(data) {
