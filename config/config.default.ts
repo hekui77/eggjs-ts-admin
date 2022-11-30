@@ -55,6 +55,11 @@ export default (appInfo: EggAppInfo) => {
     agent: false,
   };
 
+  config.cors = {
+    origin: '*', // 域名+端口 或者  *(全匹配)
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
+  };
+
   // the return config will combines to EggAppConfig
   return {
     ...config,
