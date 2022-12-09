@@ -46,7 +46,7 @@ export default (appInfo: EggAppInfo) => {
       host: '116.62.64.16',
       port: '3306',
       user: 'admin_project',
-      password: 'CAspd2BwxwnKPNAW',
+      password: 'CAXFWfeNSr5EztXJ',
       database: 'admin_project',
     },
     // 是否加载到 app 上，默认开启
