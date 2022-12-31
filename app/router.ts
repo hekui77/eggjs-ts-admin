@@ -11,5 +11,7 @@ export default (app: Application) => {
 
   router.post('/api/user/login', controller.user.login);
   router.post('/api/user/register', controller.user.register);
+
   router.get('/api/user', jwt, controller.user.find);
+
 };
