@@ -42,10 +42,12 @@ jobs:
           ${{ runner.os }}-build-
           ${{ runner.os }}-
 
-    # 压缩要上传到服务器的代码
-    - name: Tar
+    # 构建源代码, 并压缩要上传到服务器的代码
+    - name: Build
       uses: actions/setup-node@master
-    - run: tar -zcvf release.tgz app config test typings .autod.conf.js .eslintignore .eslintrc .gitignore app.ts package-lock.json tsconfig.json
+    - run: yarn
+    - run: yarn tsc
+    - run: tar -zcvf release.tgz node_modules app config test typings .autod.conf.js .eslintignore .eslintrc .gitignore app.ts package-lock.json tsconfig.json
 
     # 上传打包资源
     - name: Deploy
@@ -59,7 +61,5 @@ jobs:
         last_ssh: |
           cd /www/wwwroot/eggjs-ts-admin/
           tar -xzvf release.tgz
-          npm i
-          npm run tsc
           npm run stop
           npm run start
