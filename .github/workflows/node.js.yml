@@ -47,7 +47,7 @@ jobs:
       uses: actions/setup-node@master
     - run: yarn
     - run: yarn tsc
-    - run: tar -zcvf release.tgz .nuxt app config test typings .autod.conf.js .eslintignore .eslintrc .gitignore app.ts package-lock.json tsconfig.json
+    - run: tar -zcvf release.tgz app config test typings .autod.conf.js .eslintignore .eslintrc .gitignore app.ts package-lock.json tsconfig.json
 
     # 上传打包资源
     - name: Deploy
