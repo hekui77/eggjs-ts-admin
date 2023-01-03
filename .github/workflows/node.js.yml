@@ -61,5 +61,5 @@ jobs:
         last_ssh: |
           cd /www/wwwroot/eggjs-ts-admin/
           tar -xzvf release.tgz
-          yarn stop
-          yarn start
+          npm run stop
+          npm run start
