@@ -1,0 +1,65 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Node.js CI
+
+on:
+  push:
+    # 只有master分支发生push事件时，才会触发workflow
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+env:
+  ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }} # 服务器私钥
+  SERVER_HOST: ${{ secrets.SERVER_HOST }} # 服务器IP地址
+  USER_NAME: ${{ secrets.USER_NAME }} # 服务器用户名
+  cache-name: note
+
+# jobs表示执行的一项或多项任务
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest # runs-on字段指定运行所需要的虚拟机环境。注意：这个是必填字段
+    steps:
+    - uses: actions/checkout@master
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '14.x'
+
+    #缓存依赖
+    - name: Cache nodemodules
+      uses: actions/cache@v1
+      env:
+        cache-name: cache-node-modules
+      with:
+        # 需要缓存的文件的路径
+        path: ./node_modules 
+        # 对缓存的文件指定的唯一标识
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./package.json') }} 
+        # 用于没有再找目标key的缓存的backup选项
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+
+    # 构建源代码, 并压缩要上传到服务器的代码
+    - name: Build
+      uses: actions/setup-node@master
+    - run: yarn
+    - run: yarn ci
+    - run: tar -zcvf release.tgz .nuxt app config test typings .autod.conf.js .eslintignore .eslintrc .gitignore app.ts package-lock.json tsconfig.json
+
+    # 上传打包资源
+    - name: Deploy
+      uses: cross-the-world/ssh-scp-ssh-pipelines@latest
+      with:
+        key: ${{ env.ACCESS_TOKEN }}
+        host: ${{ env.SERVER_HOST }}
+        user: ${{ env.USER_NAME }}
+        scp: |
+          './release.tgz' => /www/wwwroot/eggjs-ts-admin/
+        last_ssh: |
+          cd /www/wwwroot/eggjs-ts-admin/
+          tar -xzvf release.tgz
+          yarn stop
+          yarn start
