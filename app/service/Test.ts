@@ -1,5 +1,4 @@
-import { Service } from 'egg';
-
+const Service = require('egg').Service;
 /**
  * Test Service
  */
