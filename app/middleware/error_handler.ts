@@ -9,7 +9,8 @@ module.exports = () => {
       const status = err.status || 500;
       // 如果时生产环境的时候 500错误的详细错误内容不返回给客户端
       const error = status === 500 && ctx.app.config.env === 'prod' ? '网络错误' : err.message;
-      ctx.body = { msg: error, status, err: ctx.app.config.env === 'prod' ? '' : err };
+      // ctx.body = { msg: error, status, err: ctx.app.config.env === 'prod' ? '' : err };
+      ctx.body = { msg: error, status, err };
     }
   };
 };
